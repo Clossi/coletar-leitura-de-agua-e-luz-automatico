@@ -1,87 +1,34 @@
-# coletar-leitura-de-agua-e-luz-automatico
-Com este codigo estou iniciando um projeto, de forma resumida e simples, eu quero poder auxiliar na coleta de leitura de agua e luz nas residencias, o formato atual é 100% humano e acaba havendo dezenas de problemas, tais como: Erro de leitura por não enxergar bem, e não haver a leitura pois o colaborador esta com problemas de saude etc...
+Aqui está o texto pronto para o seu **README.md**, Sr. Clossi. Pode copiar do início ao fim do bloco abaixo:
 
-1. Código para o Hidrômetro (usando ESP8266 e Wi-Fi):
+```markdown
+# 💧 Coletor Automático de Leitura (Água e Energia)
 
-import machine
-import network
-import urequests
-import time
+## 📌 Contexto do Projeto
+Este projeto nasceu de uma necessidade real observada durante minha experiência como Agente de Saneamento. Identifiquei que o processo de coleta de leitura em residências ainda é majoritariamente manual, o que gera gargalos operacionais e maior incidência de erros humanos.
 
-# Configurações Wi-Fi
-SSID = "Seu_SSID"
-PASSWORD = "Sua_Senha"
+O objetivo deste software é automatizar e digitalizar a entrada desses dados, servindo como base para um sistema de gestão de consumo mais eficiente e moderno.
 
-# Configuração do sensor de fluxo de água
-sensor = machine.Pin(14, machine.Pin.IN)
+## 🚀 Tecnologias Utilizadas
+*   **Python 3.x**: Linguagem principal para a lógica do sistema.
+*   **Manipulação de Dados**: Foco em validação de entradas e integridade da leitura.
 
-# Configuração da conexão Wi-Fi
-wifi = network.WLAN(network.STA_IF)
-wifi.active(True)
-wifi.connect(SSID, PASSWORD)
+## ✨ Funcionalidades (MVP)
+- [x] Interface para entrada de dados de leitura.
+- [x] Validação automática para evitar leituras negativas ou fora do padrão.
+- [x] Registro histórico de consumo por residência.
+- [ ] Interface Mobile (Em desenvolvimento).
+- [ ] Integração com banco de dados SQL (Em planejamento).
 
-# Esperar a conexão Wi-Fi
-while not wifi.isconnected():
-    time.sleep(1)
+## 💡 Diferencial Técnico
+Diferente de projetos acadêmicos comuns, este sistema aplica **regras de negócio complexas** do setor de serviços essenciais, demonstrando minha capacidade de traduzir problemas do mundo físico para soluções de software eficientes.
 
-print("Conectado ao Wi-Fi")
+## 📈 Evolução e ADS
+Como estudante de **Análise e Desenvolvimento de Sistemas**, utilizo este repositório como laboratório para aplicar conceitos de:
+*   Arquitetura de software.
+*   Tratamento de exceções.
+*   Persistência de dados.
 
-# Função para medir o fluxo de água
-def medir_fluxo():
-    # Lógica para medir o fluxo de água
-    # Por exemplo, contando pulsos do sensor
-    pulsos = 0
-    for i in range(10):
-        if sensor.value() == 1:
-            pulsos += 1
-        time.sleep(0.1)
-    return pulsos
-
-# Função para enviar dados à nuvem
-def enviar_dados(consumo):
-    url = "https://www.corsan.com/api/hidrometro"
-    dados = {"consumo": consumo, "cliente_id": "Divino Clossi"}
-    try:
-        response = urequests.post(url, json=dados)
-        print(response.text)
-    except Exception as e:
-        print("Erro ao enviar dados:", e)
-
-# Loop principal
-while True:
-    consumo = medir_fluxo()
-    enviar_dados(consumo)
-    time.sleep(3600)  # Envia os dados a cada hora
-2. Código Backend (Python Flask):
-
-from flask import Flask, request, jsonify
-from datetime import datetime
-import sqlite3
-
-app = Flask(__name__)
-
-# Conexão com o banco de dados
-def connect_db():
-    conn = sqlite3.connect('corsan.db')
-    return conn
-
-# Rota para receber dados do hidrômetro
-@app.route('/api/hidrometro', methods=['POST'])
-def receber_dados():
-    data = request.get_json()
-    consumo = data['consumo']
-    cliente_id = data['cliente_id']
-    timestamp = datetime.now()
-
-    # Armazenar os dados no banco de dados
-    conn = connect_db()
-    cursor = conn.cursor()
-    cursor.execute("INSERT INTO leituras (cliente_id, consumo, timestamp) VALUES (?, ?, ?)",
-                   (cliente_id, consumo, timestamp))
-    conn.commit()
-    conn.close()
-
-    return jsonify({"status": "sucesso", "cliente_id": cliente_id, "consumo": consumo})
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+---
+**Desenvolvido por Divino Clossi**  
+[LinkedIn](https://www.linkedin.com/in/divino-clossi) | [Portfólio](https://github.com/Clossi)
+```
