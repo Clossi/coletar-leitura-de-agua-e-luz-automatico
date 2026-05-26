@@ -1,4 +1,4 @@
-Aqui está o texto pronto para o seu **README.md**, Sr. Clossi. Pode copiar do início ao fim do bloco abaixo:
+
 
 ```markdown
 # 💧 Coletor Automático de Leitura (Água e Energia)
@@ -9,7 +9,7 @@ Este projeto nasceu de uma necessidade real observada durante minha experiência
 O objetivo deste software é automatizar e digitalizar a entrada desses dados, servindo como base para um sistema de gestão de consumo mais eficiente e moderno.
 
 ## 🚀 Tecnologias Utilizadas
-*   **Python 3.x**: Linguagem principal para a lógica do sistema.
+*   **Python 3.2 Linguagem principal para a lógica do sistema.
 *   **Manipulação de Dados**: Foco em validação de entradas e integridade da leitura.
 
 ## ✨ Funcionalidades (MVP)
